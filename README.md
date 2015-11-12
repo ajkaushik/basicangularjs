@@ -16,7 +16,7 @@ This repo has simple examples of angular components like Module, Services, Provi
 - [Plunk showing all type of providers and their subtle differences](http://plnkr.co/edit/JAVeweDD1AW4H0IiJ5kh?p=preview)
 
 ## Setup to run the examples
-1. Install Node (go to [Node Install](https://nodejs.org/en/download/), if you do not have that installed. Our Angular example code do not have any dependency on nodejs, we will be using node for starting a local web server(Alternatively, you can use [Brackets IDE](http://brackets.io/), which comes with a built in static web server).
+1. Install Node (go to [Node Install](https://nodejs.org/en/download/)), if you do not have that installed. Our Angular example code do not have any dependency on nodejs, we will be using node for starting a local web server(Alternatively, you can use [Brackets IDE](http://brackets.io/), which comes with a built in static web server).
 2. Clone this repo (If you do not have git installed on your machine, just download zip and unzip in your machine). Copy this command in your shell (cmd in windows) : 
   - `git clone https://github.com/ajkaushik/basicangularjs.git`
 3. If you chose to install node, Go to root of the app directory in a shell window(cmd prompt) and run : `npm i`. This will install [live-server](https://github.com/tapio/live-server).
