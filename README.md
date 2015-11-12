@@ -1,5 +1,5 @@
 # basicangularjs
-This repo has simple examples of angular components like Module, Services, Providers and Controllers. And also shows usage of ui routing using ui state based angular-ui-router.
+## This repo has simple examples of angular components like Module, Services, Providers and Controllers. And also shows usage of ui routing using state based angular-ui-router.
 
 **Pre-Read topics. Please go through these concepts before starting with examples**
 
