@@ -24,7 +24,7 @@ This repo has simple examples of angular components like Module, Services, Provi
 5. If you have downloaded [Brackets IDE](http://brackets.io/) :
   * Open root folder with Brackets
   * Open Index.html in editor pane
-  * Click on Live Preview button (top right button in side panel), it will start a local web server with live reload.
+  * Click on Live Preview button (top button in right side panel), it will start a local web server with live reload.
 
 ## Description of Examples in Repo
 **This repo has two different examples, one is UserModule which display basic CRUD opertaions using angular services (No backend is used, it uses simple javascript arrays to hold the data for demo purpose). And other examaple is basically a github repo explorer which uses `$http` service of angular to get repo details from github api and also shows various basic usages of ui-routing and `$stateparams` service.**
