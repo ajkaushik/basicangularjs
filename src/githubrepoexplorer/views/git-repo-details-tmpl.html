@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="col col-md-8">
+        <div class="well">
+            <a href="#/reposearch">Back to Search</a>
+            <br/>
+            <a href="#/repoexplorer/user/{{repoDetailsCtrl.repo.owner.login}}">Back to {{repoDetailsCtrl.repo.owner.login}}</a>
+            <h2>{{repoDetailsCtrl.repo.name}}</h2>
+            <div>Issues: {{repoDetailsCtrl.repo.open_issues_count}}</div>
+            <div class="list-group" ng-controller="userCtrl as userCtrl">
+                <a ng-repeat="user in repoDetailsCtrl.repo.collaborators" class="list-group-item">
+                    <span class="list-group-item-text">
+            <img style="width:80px;height:80px;" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
+        </span>
+                    <span class="list-group-item-text">{{user.login}}</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

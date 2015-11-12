@@ -1,0 +1,21 @@
+<div class="well">
+    <fieldset>
+        <legend>Existing Users</legend>
+        <img alt="Loading Users..." src="assets/img/progress.gif" ng-if="userCtrl.userLoadPending"></img>
+        <div class="list-group">
+            <!--ng-repeat is an Angular directive, one of the most commonly used one. This directive takes an array and will iterate over that and for each iteration will repeat the same HTML content. In below example, it will create multiple div elements (equal to the number of users in userCtrl.users array-->
+            <!--{{This is the way to specfiy angular expression}}-->
+            <!--For example, {{user.firstName}} will be replaced by the first name from correponding user name in that iteration is ng-repeat-->
+            <!--ng-class is an angular directive to specify the style at run time using an angular expression-->
+
+            <!--ng-click directive will call the mentioned function with an user object corresponding to that iteration of ng-repeat. Each iteration of ng-repeat create a new scope, so the current user object will be captured by that scope and can be referred later-->
+            <div ng-repeat="user in userCtrl.users" class="list-group-item user-animate" ng-class='{"active":userCtrl.originalUser===user}' ng-click="userCtrl.setUserForEditing(user);">
+                <span class="list-group-item-text">{{user.firstName}}</span>
+                <span class="list-group-item-text">{{user.lastName}}</span>
+
+                <!--ng-click will call the deleteCurrentUser function with the given user object of that scope. basically every iteration of ng-repeat will have its wown scope and in that each will have a user object-->
+                <button class="close btn btn-danger" ng-click="userCtrl.deleteCurrentUser(user);$event.stopPropagation();" title="Delete this user">&times;</button>
+            </div>
+        </div>
+    </fieldset>
+</div>

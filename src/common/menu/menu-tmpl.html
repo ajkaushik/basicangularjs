@@ -1,0 +1,29 @@
+<!--This is a partial HTML which will be used by a ng-include or a custom directive-->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <!--ui-sref is a directive provided by ui-router module. This module provides client side navigation and using various states we can add/remove various HTML views. 
+        ui-sref="statename" This state Name will be provided in module.config function.-->
+            <!--state="home". Check main-module.js-->
+            <a class="navbar-brand" ui-sref="home">User Admin App</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbardiv">
+            <ul class="nav navbar-nav">
+                <!--ui-sref-active will assign the given css class, if this state is active-->
+                <!--MenuItems will be supplied by MenuService
+                and each module will add its own menu items-->
+                <!--ng-repeat will create menu item for the same collection-->
+                <!--For all UI States. Check main-module.js-->
+                <li ui-sref-active="active" ng-repeat="menuItem in appMenuCtrl.menuItems" 
+               >
+                    <a ng-if="menuItem.menuItems" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{menuItem.title}} <span class="caret"></span></a>
+                    <ul ng-if="menuItem.menuItems" class="dropdown-menu">
+                        <li ui-sref-active="active" ng-repeat="childMenuItem in menuItem.menuItems">
+                            <a ui-sref="{{childMenuItem.uiSref}}"> {{childMenuItem.title}}</a>
+                    </ul>
+                    <a ng-if="!menuItem.menuItems" ui-sref="{{menuItem.uiSref}}">                   {{menuItem.title}}</a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</nav>

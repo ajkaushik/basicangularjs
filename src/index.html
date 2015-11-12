@@ -1,0 +1,64 @@
+<!--ng-app tells angular that this is main app, so its markup will be parsed by angular. And it takes the name of main module for the application. In our case that would be mainApp-->
+<html ng-app="mainApp">
+
+<head>
+    <title>User Admin App</title>
+    <!--Bootstrap provides a layout framework, which provides
+    same experience on mobile/web. Read More about bootstrap http://getbootstrap.com/css/-->
+    <link rel="stylesheet" type="text/css" href="libs/css/bootstrap.min.css">
+    <!--ng-animate is a animation css for angular-->
+    <link rel="stylesheet" type="text/css" href="libs/css/ng-animation.css">
+    <!--angular-toastr is a simple notification provider, simple popup-->
+    <link rel="stylesheet" type="text/css" href="libs/css/angular-toastr.css">
+    <!--our app specific css-->
+    <link rel="stylesheet" type="text/css" href="libs/css/app.css">
+</head>
+<!--ng-controller is an Angular directive, to assign a particular controller to the given section of HTML document-->
+<!--ng-controller provides the view model capability, which acts a binding source-->
+
+<body ng-controller="mainCtrl as mainCtrl">
+    <!--This is custom directive. And at runtime angular will replace this custom directive with respective HTML (if ANY), as specified in directive definition-->
+    <mainappmenu></mainappmenu>
+    <!--ui-view is a place holder for dynamic view loading, which will be used for Ui router. At run time whenever we change state, angular will load HTML content corresponding to that state in this ui-view placeholder.-->
+    <ui-view></ui-view>
+    <!--Vendor scripts-->
+    <!--Other libraries have some dependency on jquery-->
+    <script src="libs/js/jquery.min.js" type="text/javascript"></script>
+    <!--This is main Angular Script and should be included before any
+    other app specific/angular specific script-->
+    <script src="libs/js/angular.js" type="text/javascript"></script>
+    <!--Angular UI Router provides client side routing capability using
+    concept of states, in simple words we can specify a container using
+    ui-view directive and than as per given state ui-router will switch out the corresponding HTML for that state. Refer to states added by each module.-->
+    <script src="libs/js/angular-ui-router.js" type="text/javascript"></script>
+    <!--This provide for animation support-->
+    <script src="libs/js/angular-animate.js" type="text/javascript"></script>
+    <!--These are needed by toastr, for notifications-->
+    <script src="libs/js/toastr.js" type="text/javascript"></script>
+    <script src="libs/js/angular-toastr.tpls.min.js" type="text/javascript"></script>
+    <!--Bootstrap provides a responsive layout-->
+    <script src="libs/js/bootstrap.js" type="text/javascript"></script>
+    <!--App scripts, as of now we will add these manually here, whenever any new module/controller/service is being added. But once we cover automation, this will get automated and then we will not have to add these manually-->
+    <script src="common/logger/logger-module.js"></script>
+    <script src="common/logger/logger-service.js"></script>
+    <script src="common/menu/menu-module.js"></script>
+    <script src="common/menu/menu-provider.js"></script>
+    <script src="common/menu/menu-controller.js"></script>
+    <script src="common/menu/menu-directive.js"></script>
+    <script src="common/app.core-module.js"></script>
+    <script src="user/user-module.js"></script>
+    <script src="user/user-module-config.js"></script>
+    <script src="user/user-service.js"></script>
+    <script src="user/user-controller.js"></script>
+    <script src="githubrepoexplorer/modules/git-repo-explorer-module.js"></script>
+    <script src="githubrepoexplorer/modules/git-repo-explorer-module-config.js"></script>
+    <script src="githubrepoexplorer/services/git-repo-explorer-constants.js"></script>
+    <script src="githubrepoexplorer/services/git-repo-explorer-service.js"></script>
+    <script src="githubrepoexplorer/controllers/git-repo-explorer-controller.js"></script>
+    <script src="githubrepoexplorer/controllers/git-repo-details-controller.js"></script>
+    <script src="githubrepoexplorer/controllers/git-repo-user-controller.js"></script>
+    <script src="main/main-module.js"></script>
+    <script src="main/main-controller.js"></script>
+</body>
+
+</html>

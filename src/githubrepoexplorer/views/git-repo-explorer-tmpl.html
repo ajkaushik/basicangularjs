@@ -1,0 +1,14 @@
+<div class="container">
+    <fieldset>
+        <legend>Git Repo Explorer</legend>
+
+        <div class="col col-md-4">
+            <div class="well">
+                <div class="form-group">
+                    <input type="text" required="true" class="form-control" id="username" placeholder="User name to find" ng-model="gitRepoExplorerCtrl.username">
+                </div>
+                <button type="submit" class="btn btn-default" ng-click="gitRepoExplorerCtrl.search(gitRepoExplorerCtrl.username)">Search</button>
+            </div>
+        </div>
+    </fieldset>
+</div>
