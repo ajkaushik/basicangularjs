@@ -20,11 +20,23 @@
             repoDetailsCtrl.error = reason;
         };
 
-        var reponame = $stateParams.reponame;
-        var username = $stateParams.username;
+        //reponame and username have been passed in url
+        //we will again use stateparam service to get the values and
+        //load repo details from git hub api
+        repoDetailsCtrl.reponame = $stateParams.reponame;
+        repoDetailsCtrl.username = $stateParams.username;
 
-        githubExplorerService.getRepoDetails(username, reponame)
-            .then(onRepoSuccess, onRepoError);
+        //Set flag for repo details loading
+        repoDetailsCtrl.repoDetailsLoading = true;
+        //This function will be triggered as soon as we hit this url
+        githubExplorerService.getRepoDetails(repoDetailsCtrl.username,
+                repoDetailsCtrl.reponame)
+            .then(onRepoSuccess)
+            .catch(onRepoError)
+            .finally(function() {
+                //Hide progress bar
+                repoDetailsCtrl.repoDetailsLoading = false;
+            });
 
     }
 }(window.angular));
