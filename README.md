@@ -21,6 +21,10 @@ This repo has simple examples of angular components like Module, Services, Provi
   - `git clone https://github.com/ajkaushik/basicangularjs.git`
 3. If you chose to install node, Go to root of the app directory in a shell window(cmd prompt) and run : `npm i`. This will install [live-server](https://github.com/tapio/live-server).
 4. Run `npm start` in shell (cmd prompt) and it should open a browser tab with our angular app loaded in it.
+5. If you have downloaded [Brackets IDE](http://brackets.io/) :
+  * Open root folder with Brackets
+  * Open Index.html in editor pane
+  * Click on Live Preview button (top right button in side panel), it will start a local web server with live reload.
 
 ## Description of Examples in Repo
 **This repo has two different examples, one is UserModule which display basic CRUD opertaions using angular services (No backend is used, it uses simple javascript arrays to hold the data for demo purpose). And other examaple is basically a github repo explorer which uses `$http` service of angular to get repo details from github api and also shows various basic usages of ui-routing and `$stateparams` service.**
