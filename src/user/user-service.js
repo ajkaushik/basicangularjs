@@ -102,18 +102,18 @@
                     //to the caller, which will get resolve/reject as per the result
                     //of the Remote service call
                     $http.get(USER_API_URL)
-                    //$http service returns a promise, so attach the
-                    //required handlers will be called
-                    //if the remote service call is successfull
-                    .then(function(response) {
+                        //$http service returns a promise, so attach the
+                        //required handlers will be called
+                        //if the remote service call is successfull
+                        .then(function(response) {
 
-                        //Remote call was successful, do some processing
-                        //on the response
-                        users = response.data;
-                        //And now, resolve the promise which we created and was
-                        //returned to the caller of this function
-                        deferred.resolve(users);
-                    })
+                            //Remote call was successful, do some processing
+                            //on the response
+                            users = response.data;
+                            //And now, resolve the promise which we created and was
+                            //returned to the caller of this function
+                            deferred.resolve(users);
+                        })
                         .catch(function(error) {
                             //.catch will be called if remote service call 
                             //fails due to some reason Remote call failed, 
@@ -144,7 +144,7 @@
 
             //HardCoded error condition, just to show failure on screen
             if (!originalUser || originalUser.firstName === "Abhishek") {
-                deferred.reject("Error in saving");
+                deferred.reject("Mock Error scenario - Update failed.");
             } else {
                 var index = users.indexOf(originalUser);
                 if (index > -1) {
@@ -160,7 +160,7 @@
 
             //HardCoded error condition, just to show failure on screen
             if (!user || user.firstName === "Abhishek") {
-                deferred.reject("Error in deletion");
+                deferred.reject("Mock Error scenario - Deletion failed.");
             } else {
                 var index = users.indexOf(user);
                 if (index > -1) {
