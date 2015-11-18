@@ -1,0 +1,38 @@
+<div class="col col-md-12">
+    <div class="well">
+        <div class="container">
+            <div class="col col-md-8">
+                <ng-include src="'main/main-jumbo-tmpl.html'">
+                </ng-include>
+            </div>
+            <div class="col col-md-4">
+                <div class="well login-well">
+                    <fieldset>
+                        <legend>Login</legend>
+                        <form name="loginCtrl.loginForm" noValidate>
+                            <div class="form-group" ng-class="{'has-error' : loginCtrl.loginForm.username.$invalid && !loginCtrl.loginForm.username.$pristine}">
+                                <label for="username">User Name</label>
+                                <input type="text" class="form-control" name="username" placeholder="Enter user name" ng-model="loginCtrl.username" required>
+                                <div class="help-block" ng-messages="loginCtrl.loginForm.username.$error" ng-show="!loginCtrl.loginForm.username.$pristine">
+                                    <div ng-messages-include="authentication/login/login-form-validation-messages.html"></div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{'has-error' : loginCtrl.loginForm.password.$invalid && loginCtrl.loginForm.password.$touched}">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password" placeholder="Enter password" ng-model="loginCtrl.password" required ng-minlength="5">
+                                <div class="help-block" ng-messages="loginCtrl.loginForm.password.$error" ng-show="loginCtrl.loginForm.password.$touched">
+                                    <div ng-messages-include="authentication/login/login-form-validation-messages.html"></div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-md" ng-click="loginCtrl.login(loginCtrl.username,loginCtrl.password);"  
+                            ng-disabled="!loginCtrl.loginForm.$valid" 
+                            showprogress="loginCtrl.isLoginPending">Login
+                                <!--<img alt="" src="assets/img/progress.gif" ng-if="loginCtrl.isLoginPending"></img>-->
+                            </button>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

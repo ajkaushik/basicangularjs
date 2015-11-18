@@ -5,18 +5,22 @@
     -o-transition: 600ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
     transition: 600ms cubic-bezier(0.000, 0.000, 0.580, 1.000) all;
 }
+
 .user-animate {
     line-height: 8px;
     list-style: none;
     box-sizing: border-box;
     margin: .5em;
 }
+
 .user-animate.ng-leave {
     left: 0;
 }
+
 .user-animate.ng-leave.ng-leave-active {
     left: 100%;
 }
+
 .user-animate.ng-enter {
     -webkit-transition: 600ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     -moz-transition: 600ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
@@ -24,12 +28,15 @@
     -o-transition: 600ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
     transition: 600ms cubic-bezier(0.420, 0.000, 1.000, 1.000) all;
 }
+
 .user-animate.ng-enter {
     left: 100%;
 }
+
 .user-animate.ng-enter.ng-enter-active {
     left: 0;
 }
+
 .close {
     float: right;
     font-size: 21px;
@@ -40,6 +47,7 @@
     filter: alpha(opacity=20);
     opacity: .5;
 }
+
 .close:hover,
 .close:focus {
     color: #000;
@@ -48,11 +56,93 @@
     filter: alpha(opacity=50);
     opacity: .7;
 }
+
 .list-group-item:hover,
 .list-group-item:focus,
 {
     cursor: pointer !important;
 }
+
 body {
     background-color: E4EAED;
 }
+
+legend {
+    border-bottom: 1px solid #006687;
+}
+
+.login-well {
+    background-color: lightgray;
+    font-weight: bold;
+}
+
+.login-well label,
+.login-well div,
+.login-well p,
+.login-well input {
+    font-weight: bold;
+}
+
+.offMargin {
+    margin-top: 40px !important;
+}
+
+
+/* Have to set height explicity on ui-view 
+to prevent collapsing during animation*/
+
+.well.main-ui-view {
+    height: 65px;
+}
+
+.well-main {
+    min-height: 87% !important;
+    background-color: lightgray;
+}
+
+.ui-view-container {
+    position: relative;
+}
+
+.main-ui-view.ng-enter,
+.main-ui-view.ng-leave {
+    position: absolute;
+    left: 0;
+    right: 0;
+    -webkit-transition: all .5s ease-in-out;
+    -moz-transition: all .5s ease-in-out;
+    -o-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+}
+
+.main-ui-view.ng-enter {
+    opacity: 0;
+    -webkit-transform: scale3d(0.5, 0.5, 0.5);
+    -moz-transform: scale3d(0.5, 0.5, 0.5);
+    transform: scale3d(0.5, 0.5, 0.5);
+}
+
+.main-ui-view.ng-enter-active {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+}
+
+.main-ui-view.ng-leave {
+    opacity: 1;
+    /*padding-left: 0px;*/
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+}
+
+.main-ui-view.ng-leave-active {
+    opacity: 0;
+    /*padding-left: 100px;*/
+    -webkit-transform: translate3d(100px, 0, 0);
+    -moz-transform: translate3d(100px, 0, 0);
+    transform: translate3d(100px, 0, 0);
+}
+.img-center {margin:0 auto;}
+

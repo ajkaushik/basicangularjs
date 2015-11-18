@@ -1,23 +1,16 @@
-<div class="container">
+<div class="well">
     <fieldset>
-        <legend>Collaborators details of repo : {{repoDetailsCtrl.reponame}}</legend>
-        <div class="col col-md-8">
-            <div class="well">
-                <img alt="Loading Repo details..." src="assets/img/progress.gif" ng-if="repoDetailsCtrl.repoDetailsLoading"></img>
-                <div ng-if="!repoDetailsCtrl.repoDetailsLoading">
-                    <a href="#/reposearch">Back to Search</a>
-                    <br/>
-                    <a href="#/repoexplorer/user/{{repoDetailsCtrl.repo.owner.login}}">Back to {{repoDetailsCtrl.repo.owner.login}}</a>
-                    <h2>{{repoDetailsCtrl.repo.name}}</h2>
-                    <div class="list-group" ng-controller="userCtrl as userCtrl">
-                        <a ng-repeat="user in repoDetailsCtrl.repo.collaborators" class="list-group-item">
-                            <span class="list-group-item-text">
+        <legend>Collaborators</legend>
+        <img alt="Loading Repo details..." src="assets/img/progress.gif" ng-if="repoDetailsCtrl.repoDetailsLoading"></img>
+        <div ng-if="!repoDetailsCtrl.repoDetailsLoading">
+            <h3>{{repoDetailsCtrl.repo.name}}</h3>
+            <div class="list-group" ng-controller="userCtrl as userCtrl">
+                <a ng-repeat="user in repoDetailsCtrl.repo.collaborators" class="list-group-item">
+                    <span class="list-group-item-text">
             <img style="width:80px;height:80px;" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
         </span>
-                            <span class="list-group-item-text">{{user.login}}</span>
-                        </a>
-                    </div>
-                </div>
+                    <span class="list-group-item-text">{{user.login}}</span>
+                </a>
             </div>
         </div>
     </fieldset>

@@ -1,19 +1,32 @@
 [{
+    "userName": "jmac",
+    "password": "test123",
+    "roles": ["admin", "user"],
     "firstName": "John",
     "lastName": "Mac"
 }, {
+    "userName": "pjohnson",
+    "password": "test123",
     "firstName": "Phil",
     "lastName": "Johnson"
 }, {
+    "userName": "mhenry",
+    "password": "test123",
     "firstName": "Mike",
     "lastName": "Henry"
 }, {
+    "userName": "asharma",
+    "password": "test123",
     "firstName": "Abhishek",
     "lastName": "Sharma"
 }, {
+    "userName": "tjames",
+    "password": "test123",
     "firstName": "Tim",
     "lastName": "James"
 }, {
+    "userName": "vroy",
+    "password": "test123",
     "firstName": "Vivek",
     "lastName": "Roy"
 }]

@@ -15,8 +15,12 @@
     //reuse easy. For example, we just created a module for logging
     //and this can be used in any other module, as this does not have
     //any app specific knowledge
-    var loggerModule = angular.module("loggerModule", ['ngAnimate']);
+    var loggerModule = angular.module("loggerModule", ["ngAnimate", "toastr"]);
 
-    loggerModule.constant('toastr', toastr);
-
+    loggerModule.config(function(toastrConfig) {
+        angular.extend(toastrConfig, {
+            positionClass: 'toast-top-right offMargin',
+            timeOut: 4000
+        });
+    })
 }(window.angular));

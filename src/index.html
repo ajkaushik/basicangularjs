@@ -17,27 +17,59 @@
 <!--ng-controller provides the view model capability, which acts a binding source-->
 
 <body ng-controller="mainCtrl as mainCtrl">
-    <!--This is custom directive. And at runtime angular will replace this custom directive with respective HTML (if ANY), as specified in directive definition-->
-    <mainappmenu></mainappmenu>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <!--state="home". Check main-module.js-->
+                <a class="navbar-brand" ui-sref="home">User Admin App</a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbardiv">
+                <!--This is custom directive. And at runtime angular will replace this custom directive with respective HTML (if ANY), as specified in directive definition-->
+                <mainappmenu ng-if="mainCtrl.CurrentUser.Name"></mainappmenu>
+                <ul class="nav navbar-nav navbar-right">
+                    <li ng-if="!mainCtrl.CurrentUser.Name"><a ui-sref="login">Login</a></li>
+                    <li ng-if="mainCtrl.CurrentUser.Name">
+                        <p class="navbar-text"> {{mainCtrl.CurrentUser.Name}} &nbsp;&nbsp; <a ui-sref="logout">Logout</a>
+                        </p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <!--ui-view is a place holder for dynamic view loading, which will be used for Ui router. At run time whenever we change state, angular will load HTML content corresponding to that state in this ui-view placeholder.-->
-    <ui-view></ui-view>
+    <!--<div class="col col-md-12">
+        <div class="well well-main">
+            <div class="container">-->
+    <div class="span12 ui-view-container">
+        <div class="main-ui-view" ui-view></div>
+    </div>
+    <!--</div>
+        </div>
+    </div>-->
     <!--Vendor scripts-->
-    <!--Other libraries have some dependency on jquery-->
-    <script src="libs/js/jquery.min.js" type="text/javascript"></script>
     <!--This is main Angular Script and should be included before any
     other app specific/angular specific script-->
     <script src="libs/js/angular.js" type="text/javascript"></script>
+    <!--angular-messages provides easy way to display various messages
+    for example:validation messages-->
+    <script src="libs/js/angular-messages.min.js" type="text/javascript"></script>
     <!--Angular UI Router provides client side routing capability using
     concept of states, in simple words we can specify a container using
     ui-view directive and than as per given state ui-router will switch out the corresponding HTML for that state. Refer to states added by each module.-->
-    <script src="libs/js/angular-ui-router.js" type="text/javascript"></script>
+    <script src="libs/js/angular-ui-router.min.js" type="text/javascript"></script>
     <!--This provide for animation support-->
-    <script src="libs/js/angular-animate.js" type="text/javascript"></script>
+    <script src="libs/js/angular-animate.min.js" type="text/javascript"></script>
+    <script src="libs/js/angular-cookies.min.js" type="text/javascript"></script>
     <!--These are needed by toastr, for notifications-->
-    <script src="libs/js/toastr.js" type="text/javascript"></script>
+    <script src="libs/js/angular-toastr.min.js" type="text/javascript"></script>
     <script src="libs/js/angular-toastr.tpls.min.js" type="text/javascript"></script>
-    <!--Bootstrap provides a responsive layout-->
-    <script src="libs/js/bootstrap.js" type="text/javascript"></script>
+    <!-- <script type="text/javascript" src="libs/js/ui-bootstrap.js"></script>-->
+    <script type="text/javascript" src="libs/js/ui-bootstrap-tpls.min.js"></script>
+    <script src="libs/js/underscore-min.js" type="text/javascript"></script>
+    <!--Bootstrap provides a responsive plugins-->
+    <!--bootstrap js needs jquery-->
+    <script src="libs/js/jquery.min.js" type="text/javascript"></script>
+    <script src="libs/js/bootstrap.min.js" type="text/javascript"></script>
     <!--App scripts, as of now we will add these manually here, whenever any new module/controller/service is being added. But once we cover automation, this will get automated and then we will not have to add these manually-->
     <script src="common/logger/logger-module.js"></script>
     <script src="common/logger/logger-service.js"></script>
@@ -45,7 +77,19 @@
     <script src="common/menu/menu-provider.js"></script>
     <script src="common/menu/menu-controller.js"></script>
     <script src="common/menu/menu-directive.js"></script>
+    <script type="text/javascript" src="libs/js/spin.min.js"></script>
+    <script src="common/ui-directives/app-ui-directives-module.js"></script>
+    <script src="common/ui-directives/progress-indicator-directive.js"></script>
     <script src="common/app.core-module.js"></script>
+    <script type="text/javascript" src="authentication/login/login-module.js"></script>
+    <script type="text/javascript" src="authentication/login/login-module-config.js"></script>
+    <script type="text/javascript" src="authentication/login/login-service.js"></script>
+    <script type="text/javascript" src="authentication/login/login-directive.js"></script>
+    <script type="text/javascript" src="authentication/login/helpers/validate-username-directive.js"></script>
+    <script type="text/javascript" src="authentication/login/login-controller.js"></script>
+    <script type="text/javascript" src="authentication/session/session-module.js"></script>
+    <script type="text/javascript" src="authentication/session/session-service.js"></script>
+    <script type="text/javascript" src="authentication/session/session-user-profile-provider.js"></script>
     <script src="user/user-module.js"></script>
     <script src="user/user-module-config.js"></script>
     <script src="user/user-service.js"></script>
@@ -59,6 +103,7 @@
     <script src="githubrepoexplorer/controllers/git-repo-user-controller.js"></script>
     <script src="main/main-module.js"></script>
     <script src="main/main-module-config.js"></script>
+    <script src="main/main-service.js"></script>
     <script src="main/main-controller.js"></script>
 </body>
 

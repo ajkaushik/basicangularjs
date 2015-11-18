@@ -11,5 +11,5 @@
     //that implicitly means all the services/controllers/directives of
     //that module are available to this module
 
-    angular.module("appMenuModule", []);
+    angular.module("appMenuModule", ["ngMessages"]);
 }(window.angular));

@@ -16,5 +16,5 @@
     //will have dependency on all other common modules like loggerModule and
     //appMenuModule. And there for indirectly these modules will be available
     //to all app logic specific modules, as they will depend upon core module
-    angular.module("coreModule", ["loggerModule", "appMenuModule"]);
+    angular.module("coreModule", ["ui.router", "ui.bootstrap", "ngAnimate", "ngMessages", "loggerModule", "appMenuModule", "loginModule", "sessionModule", "app-ui-directives"]);
 }(window.angular));

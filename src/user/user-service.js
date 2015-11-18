@@ -134,41 +134,72 @@
         function createUser(newUser) {
             //console.log(users);
             var deferred = $q.defer();
-            users.push(newUser);
-            deferred.resolve(users);
+            setTimeout(function() {
+                var validationResult = validateUser(newUser);
+                if (!validationResult.isValid) {
+                    deferred.reject(validationResult.message);
+                } else {
+                    users.push(newUser);
+                    deferred.resolve(users);
+                }
+            }, 2000);
             return deferred.promise;
         }
 
-        function updateUser(originalUser, updatesUser) {
+        function updateUser(originalUser, updatedUser) {
             var deferred = $q.defer();
-
-            //HardCoded error condition, just to show failure on screen
-            if (!originalUser || originalUser.firstName === "Abhishek") {
-                deferred.reject("Mock Error scenario - Update failed.");
-            } else {
-                var index = users.indexOf(originalUser);
-                if (index > -1) {
-                    users[index] = updatesUser;
+            setTimeout(function() {
+                var validationResult = validateUser(updatedUser);
+                if (!validationResult.isValid) {
+                    deferred.reject(validationResult.message);
+                } else {
+                    //HardCoded error condition, just to show failure on screen
+                    if (!originalUser || originalUser.firstName === "Abhishek") {
+                        deferred.reject("Mock Error scenario - Update failed.");
+                    } else {
+                        var index = users.indexOf(originalUser);
+                        if (index > -1) {
+                            users[index] = updatedUser;
+                        }
+                        deferred.resolve(users);
+                    }
                 }
-                deferred.resolve(users);
-            }
+            }, 2000);
             return deferred.promise;
         }
 
         function deleteUser(user) {
             var deferred = $q.defer();
-
-            //HardCoded error condition, just to show failure on screen
-            if (!user || user.firstName === "Abhishek") {
-                deferred.reject("Mock Error scenario - Deletion failed.");
-            } else {
-                var index = users.indexOf(user);
-                if (index > -1) {
-                    users.splice(index, 1)
+            setTimeout(function() {
+                //HardCoded error condition, just to show failure on screen
+                if (!user || user.firstName === "Abhishek") {
+                    deferred.reject("Mock Error scenario - Deletion failed.");
+                } else {
+                    var index = users.indexOf(user);
+                    if (index > -1) {
+                        users.splice(index, 1)
+                    }
+                    deferred.resolve(users);
                 }
-                deferred.resolve(users);
-            }
+            }, 2000);
             return deferred.promise;
+        }
+
+        function validateUser(user) {
+            var validationResult = {};
+            if (!user) {
+                validationResult.isValid = false;
+                validationResult.message = "Invalid user details.";
+            } else if (!user.firstName) {
+                validationResult.isValid = false;
+                validationResult.message = "Invalid user first name.";
+            } else if (!user.lastName) {
+                validationResult.isValid = false;
+                validationResult.message = "Invalid user last name.";
+            } else {
+                validationResult.isValid = true;
+            }
+            return validationResult;
         }
     }
 }(window.angular));

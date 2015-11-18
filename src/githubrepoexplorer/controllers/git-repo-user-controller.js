@@ -1,8 +1,8 @@
 (function(angular) {
 
     angular.module("gitExplorerModule")
-        .controller("repoUserCtrl", ["githubExplorerService", "$stateParams",
-            function(githubExplorerService, $stateParams) {
+        .controller("repoUserCtrl", ["githubExplorerService", "$stateParams","appLogger",
+            function(githubExplorerService, $stateParams,appLogger) {
 
                 var repoUserCtrl = this;
 
@@ -19,7 +19,7 @@
                 };
 
                 var onError = function(reason) {
-                    console.log("In ctrl error");
+                    appLogger.error("Request failed.")
                     repoUserCtrl.error = "Could not fetch data";
                 };
 
@@ -41,6 +41,7 @@
                     .then(onUserComplete)
                     .catch(onError)
                     .finally(function() {
+                        //console.log("In finally 23");
                         //Irrespective of the promise result, set this
                         //flag to false so that progress img is hidden
                         repoUserCtrl.repoLoadPending = false;

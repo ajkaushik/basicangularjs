@@ -15,6 +15,10 @@
     //user management, we will add that as a dependency here, so that
     //angular can load all service/controllers defined in that module
 
+    //loginModule : This module handles the login view and login request/response
+
+    //sessionModule : This module stores the data of current user's session
+    
     //Create mainApp module.
-    angular.module("mainApp", ["ui.router", "userModule", "gitExplorerModule"]);
+    angular.module("mainApp", ["ngAnimate","userModule", "gitExplorerModule", "loginModule", "sessionModule"]);
 }(window.angular));

@@ -50,14 +50,17 @@
                     repo.collaborators = response.data;
                     deferred.resolve(repo);
                 })
-                .catch(serviceErrorHandler);
+                .catch(function(error) {
+                    console.error(error);
+                    deferred.reject("Server error, request failed.");
+                });
 
             return deferred.promise;
         }
 
         function serviceErrorHandler(error) {
-            appLogger.error("Server error, request failed.", error);
-            return $q.reject();
+            console.error(error);
+            return $q.reject("Server error, request failed.");
         }
     };
 }(window.angular));

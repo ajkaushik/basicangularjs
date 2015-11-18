@@ -74,16 +74,20 @@
         //Bootstrap user data
         userCtrl.getUsers();
 
+        userCtrl.isOperationPending = false;
         //Function for creating user
         userCtrl.createUser = function() {
-
+            userCtrl.isOperationPending = true;
             //userCtrl.newUser is bound to the controls on view, where we
             //enter the new user data, that will be available here, we will
             //pass the same object
             userService.createUser(userCtrl.newUser)
                 .then(function(users) {
+                    userCtrl.isOperationPending = false;
                     //Reset the userCtrl.newUser object to clear the input fields
                     userCtrl.newUser = undefined;
+                    userCtrl.createUserForm.$setPristine();
+                    userCtrl.createUserForm.$setUntouched();
                     //Assign the users again, the users array will have the newly
                     //created object
                     userCtrl.users = users;
@@ -104,8 +108,10 @@
         }
 
         userCtrl.updateUser = function() {
+            userCtrl.isOperationPending = true;
             userService.updateUser(userCtrl.originalUser, userCtrl.editUser)
                 .then(function(users) {
+                    userCtrl.isOperationPending = false;
                     resetFields();
                     appLogger.success("User updated successfully.");
                     assignUsers(users);
@@ -118,15 +124,26 @@
         }
 
         userCtrl.deleteCurrentUser = function(user) {
+            user.deletePending = true;
             if (userCtrl.isEditMode) {
                 resetFields();
             }
             userService.deleteUser(user)
                 .then(function(users) {
+                    if (userCtrl.isEditMode) {
+                        resetFields();
+                    }
+                    user.deletePending = false;
                     appLogger.success("User deleted successfully.");
                     assignUsers(users);
                 })
-                .catch(handleError);
+                .catch(function(error) {
+                    if (userCtrl.isEditMode) {
+                        resetFields();
+                    }
+                    user.deletePending = false;
+                    handleError(error);
+                });
         };
 
         //these are private functions 
@@ -135,6 +152,7 @@
         }
         //and will not be available in view for binding
         function handleError(error) {
+            userCtrl.isOperationPending = false;
             appLogger.error(error);
         }
 

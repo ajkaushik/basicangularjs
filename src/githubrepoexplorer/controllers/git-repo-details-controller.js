@@ -7,9 +7,9 @@
     //List all dependency for injection, this is another way of specifying
     //dependencies. Then at run time angular will find these services and inject
     //them
-    repoDetailsController.$inject = ["githubExplorerService", "$stateParams"];
+    repoDetailsController.$inject = ["githubExplorerService", "$stateParams", "appLogger"];
 
-    function repoDetailsController(githubExplorerService, $stateParams) {
+    function repoDetailsController(githubExplorerService, $stateParams, appLogger) {
 
         var repoDetailsCtrl = this;
 
@@ -18,6 +18,7 @@
         };
         var onRepoError = function(reason) {
             repoDetailsCtrl.error = reason;
+            appLogger.error(reason);
         };
 
         //reponame and username have been passed in url
@@ -34,6 +35,7 @@
             .then(onRepoSuccess)
             .catch(onRepoError)
             .finally(function() {
+                //console.log("In finally");
                 //Hide progress bar
                 repoDetailsCtrl.repoDetailsLoading = false;
             });

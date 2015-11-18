@@ -14,7 +14,7 @@
                 <span class="list-group-item-text">{{user.lastName}}</span>
 
                 <!--ng-click will call the deleteCurrentUser function with the given user object of that scope. basically every iteration of ng-repeat will have its wown scope and in that each will have a user object-->
-                <button class="close btn btn-danger" ng-click="userCtrl.deleteCurrentUser(user);$event.stopPropagation();" title="Delete this user">&times;</button>
+                <button class="close btn btn-default" ng-click="userCtrl.deleteCurrentUser(user);$event.stopPropagation();" title="Delete this user" showprogress="user.deletePending">&times;</button>
             </div>
         </div>
     </fieldset>

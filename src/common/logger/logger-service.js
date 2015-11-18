@@ -12,22 +12,36 @@
                 return {
                     success: fnsuccess,
                     error: fnerror,
-                    info: fninfo
+                    info: fninfo,
+                    warning: fnwarning
                 };
 
                 function fnsuccess(msg) {
                     console.log(msg);
-                    toastr.success(msg);
+                    toastr.success(msg, {
+                        closeButton: true
+                    });
                 }
 
                 function fnerror(error) {
                     console.error(error);
-                    toastr.error(error);
+                    toastr.error(error, {
+                        closeButton: true
+                    });
                 }
 
                 function fninfo(info) {
                     console.info(info);
-                    toastr.info(info);
+                    toastr.info(info, {
+                        closeButton: true
+                    });
+                }
+
+                function fnwarning(warning) {
+                    console.warn(info);
+                    toastr.warning(info, {
+                        closeButton: true
+                    });
                 }
 
             }

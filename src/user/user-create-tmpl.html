@@ -1,47 +1,60 @@
 <!--ng-controller is an Angular directive, to assign a particular controller to the given section of HTML document-->
-<div class="container" ng-controller="userCtrl as userCtrl">
-    <div class="col col-md-10">
-        <fieldset>
-            <!--This is an example of binding, this property will exist on corresponding view model specified by ng-controller for this section. This expression get evaluated by angular, and will be replaced by its value in case the expression yields one-->
-            <legend>{{userCtrl.title}}</legend>
-            <div class="col col-md-6">
-                <div class="well">
-                    <!--ng-if is angular directive which will use a boolean flag from controller or an expression which evaluates to true/false. In this case userCtrl.isEditMode will be used. if this condition is true, only then these elements will be added to DOM-->
-                    <fieldset ng-if=!userCtrl.isEditMode>
-                        <legend>Add new user</legend>
-                        <div class="form-group">
-                            <label for="firstName">First Name</label>
-                            <!--ng-model is an Angular directive that provides a two-way binding for input controls. In this whatever we type in firstName textbox will be available in  userCtrl.newUser.firstName-->
-                            <input type="text" class="form-control" id="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName">
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Last name</label>
-                            <!--ng-model = userCtrl.newUser.lastName-->
-                            <input type="text" class="form-control" id="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName">
-                        </div>
-                        <!--ng-click is an Angualr directive, which takes an expression which will be evaluated whenever this element is clicked. In this example everytime userCtrl.createUser() will be called-->
-                        <button type="submit" class="btn btn-default" ng-click="userCtrl.createUser();">Create User</button>
-                    </fieldset>
-                    <!--we have used another ng-if here to add elements based on some condition-->
-                    <fieldset ng-if=userCtrl.isEditMode>
-                        <legend>Edit user</legend>
-                        <div class="form-group">
-                            <label for="editFirstName">First Name</label>
-                            <input type="text" class="form-control" id="editFirstName" placeholder="First Name" ng-model="userCtrl.editUser.firstName">
-                        </div>
-                        <div class="form-group">
-                            <label for="editLastName">Last name</label>
-                            <input type="text" class="form-control" id="editLastName" placeholder="Last Name" ng-model="userCtrl.editUser.lastName">
-                        </div>
-                        <button type="submit" class="btn btn-default" ng-click="userCtrl.updateUser();">Update User</button>
-                        <button type="submit" class="btn btn-default" ng-click="userCtrl.cancelEdit();">Cancel</button>
-                    </fieldset>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10" ng-controller="userCtrl as userCtrl">
+            <fieldset>
+                <!--This is an example of binding, this property will exist on corresponding view model specified by ng-controller for this section. This expression get evaluated by angular, and will be replaced by its value in case the expression yields one-->
+                <legend>{{userCtrl.title}}</legend>
+                <div class="col-md-5">
+                    <div class="well">
+                        <!--ng-if is angular directive which will use a boolean flag from controller or an expression which evaluates to true/false. In this case userCtrl.isEditMode will be used. if this condition is true, only then these elements will be added to DOM-->
+                        <fieldset ng-if=!userCtrl.isEditMode>
+                            <legend>Add new user</legend>
+                            <form name="userCtrl.createUserForm" novalidate>
+                                <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.firstName.$invalid && userCtrl.createUserForm.firstName.$touched}">
+                                    <label for="firstName">First Name</label>
+                                    <!--ng-model is an Angular directive that provides a two-way binding for input controls. In this whatever we type in firstName textbox will be available in  userCtrl.newUser.firstName-->
+                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName" uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.firstName" required>
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.lastName.$invalid && userCtrl.createUserForm.lastName.$touched}">
+                                    <label for="lastName">Last name</label>
+                                    <!--ng-model = userCtrl.newUser.lastName-->
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.lastName">
+                                    <div class="help-block" ng-messages="userCtrl.createUserForm.lastName.$error" ng-if="userCtrl.createUserForm.lastName.$touched">
+                                        <p ng-message="minlength">Last name is too short.</p>
+                                        <p ng-message="maxlength">Last name is too long.</p>
+                                        <p ng-message="required">Last name is required.</p>
+                                    </div>
+                                </div>
+                                <!--ng-click is an Angualr directive, which takes an expression which will be evaluated whenever this element is clicked. In this example everytime userCtrl.createUser() will be called-->
+                                <button type="submit" class="btn btn-default" ng-click="userCtrl.createUser();" ng-disabled="userCtrl.createUserForm.$invalid" showprogress="userCtrl.isOperationPending">Create User</button>
+                            </form>
+                        </fieldset>
+                        <!--we have used another ng-if here to add elements based on some condition-->
+                        <fieldset ng-if=userCtrl.isEditMode>
+                            <legend>Edit user</legend>
+                            <form name="userCtrl.editUserForm" novalidate>
+                                <div class="form-group" ng-class="{'has-error':userCtrl.editUserForm.editFirstName.$invalid && !userCtrl.editUserForm.editFirstName.$pristine}">
+                                    <label for="editFirstName">First Name</label>
+                                    <input type="text" class="form-control" name="editFirstName" placeholder="First Name" ng-model="userCtrl.editUser.firstName" required uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.editUser.firstName">
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':userCtrl.editUserForm.editLastName.$invalid && !userCtrl.editUserForm.editLastName.$pristine}">
+                                    <label for="editLastName">Last name</label>
+                                    <input type="text" class="form-control" name="editLastName" placeholder="Last Name" ng-model="userCtrl.editUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.editUser.lastName">
+                                    <p ng-show="userCtrl.editUserForm.editLastName.$error.minlength" class="help-block">Last name is too short.</p>
+                                    <p ng-show="userCtrl.editUserForm.editLastName.$error.maxlength" class="help-block">Last name is too long.</p>
+                                </div>
+                                <button type="submit" class="btn btn-default" ng-click="userCtrl.updateUser();" ng-disabled="userCtrl.editUserForm.$invalid" showprogress="userCtrl.isOperationPending">Update User</button>
+                                <button type="submit" class="btn btn-default" ng-click="userCtrl.cancelEdit();">Cancel</button>
+                            </form>
+                        </fieldset>
+                    </div>
                 </div>
-            </div>
-            <div class="col col-md-6">
-                <!--ng-include is an Angular directive which provide an easy way to including html content from other html files. This keeps the html pages small and some html content which might be needed in multiple places, can be separated out in a html file and then same can be included wherever needed-->
-                <ng-include src="'user/user-list-tmpl.html'"></ng-include>
-            </div>
-        </fieldset>
+                <div class="col-md-7">
+                    <!--ng-include is an Angular directive which provide an easy way to including html content from other html files. This keeps the html pages small and some html content which might be needed in multiple places, can be separated out in a html file and then same can be included wherever needed-->
+                    <ng-include src="'user/user-list-tmpl.html'"></ng-include>
+                </div>
+            </fieldset>
+        </div>
     </div>
 </div>
