@@ -36,7 +36,7 @@
                         hwaccel: true, // Whether to use hardware acceleration
                         //top: '50%', //(radius + length) + 'px', // Top position relative to parent in px
                         //left: '50%', //((originalWidth / 2) - radius) + 'px' // Left position relative to parent in px
-                        color: "#006600",
+                        color: "black",
                         opacity:.6
                     };
                     //element.width(originalWidth + originalWidth / 2);
