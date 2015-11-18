@@ -40,7 +40,7 @@
 
 > 
 #### Login Module
-- Please check src\user\mock-users.json for username and passowrds.
+- Please check src\user\mock-users.json for username and passowrds. As of now, we are using few hardcoded usernames for logging in. Once we have the backend ready, it will be driven by auth service.
 - Added a basic login module, which stores a cookie(client side only for now, once we add the backend this cookie shall be managed by the auth service on the server).
 - It also shows the example of client side authorization using resolve function in states, before routing.
   1. Before doing any state transition user will be checked for autehntication
