@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, _) {
     //Create a new angular service, which will handle all login
     //related functionality, how to authenticate/validate user
     angular.module("loginModule")
@@ -43,15 +43,16 @@
             userService.getUsers()
                 .then(function(users) {
                     var validUser = undefined;
+                    //console.log(users);
                     if (users) {
-                        for (var i = 0; i < users.length; i++) {
-                            if (users[i].userName === username) {
-                                if (users[i].password === password) {
-                                    validUser = users[i];
+                        var validUser = _.find(users, function(user) {
+                            if (user.userName === username) {
+                                console.log(user);
+                                if (user.password === password) {
+                                    return user;
                                 }
-                                break;
                             }
-                        };
+                        });
                     }
                     if (validUser) {
                         sessionService.setCurrentUser(validUser);
@@ -106,13 +107,31 @@
 
             //For now we will just return true, as we are not using
             //any backend for actual validation
-            var validUsername = true;
-            deferred.resolve(validUsername);
 
-            //Return the promise to consumer
+            userService.getUsers()
+                .then(function(users) {
+                    var validUser = undefined;
+                    if (users) {
+                        var validUser = _.find(users, function(user) {
+                            if (user.userName === username) {
+                                return user;
+                            }
+                        });
+
+                        if (!validUser) {
+                            deferred.resolve(true);
+                        } else {
+                            deferred.reject("User already present.");
+                        }
+                    }
+                })
+                .catch(function() {
+                    deferred.reject("User validation failed.");
+                })
+                //Return the promise to consumer
             return deferred.promise;
 
         }
 
     }
-}(window.angular));
+}(window.angular, window._));

@@ -144,5 +144,11 @@ to prevent collapsing during animation*/
     -moz-transform: translate3d(100px, 0, 0);
     transform: translate3d(100px, 0, 0);
 }
-.img-center {margin:0 auto;}
 
+.img-center {
+    margin: 0 auto;
+}
+
+.progress {
+    background: url('../img/loader.gif') no-repeat right center;
+}

@@ -11,15 +11,26 @@
                         <fieldset ng-if=!userCtrl.isEditMode>
                             <legend>Add new user</legend>
                             <form name="userCtrl.createUserForm" novalidate>
+                                <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.userName.$invalid && userCtrl.createUserForm.userName.$touched}">
+                                    <label for="userName">User Name</label>
+                                    <!--ng-model is an Angular directive that provides a two-way binding for input controls. In this whatever we type in firstName textbox will be available in  userCtrl.newUser.firstName-->
+                                    <input type="text" class="form-control" name="userName" placeholder="User Name" ng-model="userCtrl.newUser.userName" ng-model-options="{ updateOn: 'blur'}" uib-tooltip="Enter user name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.userName" ng-maxlength="20" ng-minlength="4" required validateusername>
+                                    <div class="help-block" ng-messages="userCtrl.createUserForm.userName.$error" ng-if="userCtrl.createUserForm.userName.$touched">
+                                        <p ng-message="minlength">User name is too short.</p>
+                                        <p ng-message="maxlength">User name is too long.</p>
+                                        <p ng-message="required">User name is required.</p>
+                                        <p ng-message="username">User name already exists.</p>
+                                    </div>
+                                </div>
                                 <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.firstName.$invalid && userCtrl.createUserForm.firstName.$touched}">
                                     <label for="firstName">First Name</label>
                                     <!--ng-model is an Angular directive that provides a two-way binding for input controls. In this whatever we type in firstName textbox will be available in  userCtrl.newUser.firstName-->
-                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName" uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.firstName" required>
+                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName" uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.firstName" required ng-disabled="!userCtrl.newUser.userName">
                                 </div>
                                 <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.lastName.$invalid && userCtrl.createUserForm.lastName.$touched}">
                                     <label for="lastName">Last name</label>
                                     <!--ng-model = userCtrl.newUser.lastName-->
-                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.lastName">
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.lastName" ng-disabled="!userCtrl.newUser.userName">
                                     <div class="help-block" ng-messages="userCtrl.createUserForm.lastName.$error" ng-if="userCtrl.createUserForm.lastName.$touched">
                                         <p ng-message="minlength">Last name is too short.</p>
                                         <p ng-message="maxlength">Last name is too long.</p>

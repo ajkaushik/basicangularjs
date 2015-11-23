@@ -139,6 +139,7 @@
                 if (!validationResult.isValid) {
                     deferred.reject(validationResult.message);
                 } else {
+                    newUser.password = "test123";
                     users.push(newUser);
                     deferred.resolve(users);
                 }
