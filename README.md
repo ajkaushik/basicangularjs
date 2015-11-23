@@ -37,7 +37,6 @@
 - Most of the example js/html files have inline comments, please refer them for more information around individual components. 
 
 ### Update 1
-
 > 
 #### Login Module
 - Please check src\user\mock-users.json for username and passowrds. As of now, we are using few hardcoded usernames for logging in. Once we have the backend ready, it will be driven by auth service.
@@ -56,3 +55,14 @@
 <button ng-click="ctrl.createUser();" showprogress="ctrl.isOperationPending">Save</button>
 ```
 ctrl.createUser(), will set the flag ctrl.isOperationPending to true and that will start the spinner. Once the operation finishes (for example : once promise resolves/rejects), same flag can be set to false to remove the spinner.
+
+### Update 2
+>
+#### Async Validators
+##### Added a directive to show usage of async validators, which shows a very useful feature of ng-model based binding using which we can add custom validators, before updating the actual model property. Please check :
+```
+src\authentication\login\helpers\validate-username-directive.js
+src\user\user-create-tmpl.html
+```
+
+
