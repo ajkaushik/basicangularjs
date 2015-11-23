@@ -38,7 +38,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="repo in repoUserCtrl.repos | filter:{'language':'!!'} | orderBy:repoUserCtrl.repoSortOrder">
+                            <tr ng-repeat="repo in repoUserCtrl.repos | filter:{'language':'!!'} | orderBy:repoUserCtrl.repoSortOrder" >
                                 <td>
                                     <a href="#/repoexplorer/user/{{repoUserCtrl.user.login}}/repo/{{repo.name}}">
           {{repo.name}}
