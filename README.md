@@ -36,3 +36,23 @@
 - Example in this repo are using ui-router, which basically works on the concept of state based routing, where each state corresponds to a view. Please refer [ui-state-router](https://scotch.io/tutorials/angular-routing-using-ui-router).
 - Most of the example js/html files have inline comments, please refer them for more information around individual components. 
 
+### Update 1
+
+> 
+#### Login Module
+- Please check src\user\mock-users.json for username and passowrds. As of now, we are using few hardcoded usernames for logging in. Once we have the backend ready, it will be driven by auth service.
+- Added a basic login module, which stores a cookie(client side only for now, once we add the backend this cookie shall be managed by the auth service on the server).
+- It also shows the example of client side authorization using resolve function in states, before routing.
+  1. Before doing any state transition user will be checked for autehntication
+  2. Also, each state might specify it own role, which will be enforced at state routing level
+  3. If resolve fails, user will be navigated to login/home page. Please Check main-module-config.js.
+
+##### Please note client side authorization using state routing is only for a better user experience and by no mean any replacement of server side authorization checks. Each request on the server shuld be authenticated/authorized accrodingly. As any authorization on client side can be overridden by user.
+
+> 
+#### Show Progress Directive
+##### Added a simple directive to show the usage of directives. *showprogress* directive adds a spinner using *[Spin.js](http://fgnass.github.io/spin.js/)*, whenever the property used in binding for the directive is true and spinner will be removed. Example usage :
+```
+<button ng-click="ctrl.createUser();" showprogress="ctrl.isOperationPending">Save</button>
+```
+ctrl.createUser(), will set the flag ctrl.isOperationPending to true and that will start the spinner. Once the operation finishes (for example : once promise resolves/rejects), same flag can be set to false to remove the spinner.
