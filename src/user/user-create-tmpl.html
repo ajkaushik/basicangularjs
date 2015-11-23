@@ -25,12 +25,12 @@
                                 <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.firstName.$invalid && userCtrl.createUserForm.firstName.$touched}">
                                     <label for="firstName">First Name</label>
                                     <!--ng-model is an Angular directive that provides a two-way binding for input controls. In this whatever we type in firstName textbox will be available in  userCtrl.newUser.firstName-->
-                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName" uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.firstName" required ng-disabled="!userCtrl.newUser.userName">
+                                    <input type="text" class="form-control" name="firstName" placeholder="First Name" ng-model="userCtrl.newUser.firstName" uib-tooltip="Enter first name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.firstName" required ng-disabled="!userCtrl.newUser.userName || userCtrl.createUserForm.$pending">
                                 </div>
                                 <div class="form-group" ng-class="{'has-error':userCtrl.createUserForm.lastName.$invalid && userCtrl.createUserForm.lastName.$touched}">
                                     <label for="lastName">Last name</label>
                                     <!--ng-model = userCtrl.newUser.lastName-->
-                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.lastName" ng-disabled="!userCtrl.newUser.userName">
+                                    <input type="text" class="form-control" name="lastName" placeholder="Last Name" ng-model="userCtrl.newUser.lastName" required ng-maxlength="50" ng-minlength="3" uib-tooltip="Enter last name" tooltip-placement="top" tooltip-trigger="mouseenter" tooltip-enable="!userCtrl.newUser.lastName" ng-disabled="!userCtrl.newUser.userName || userCtrl.createUserForm.$pending">
                                     <div class="help-block" ng-messages="userCtrl.createUserForm.lastName.$error" ng-if="userCtrl.createUserForm.lastName.$touched">
                                         <p ng-message="minlength">Last name is too short.</p>
                                         <p ng-message="maxlength">Last name is too long.</p>
@@ -38,7 +38,7 @@
                                     </div>
                                 </div>
                                 <!--ng-click is an Angualr directive, which takes an expression which will be evaluated whenever this element is clicked. In this example everytime userCtrl.createUser() will be called-->
-                                <button type="submit" class="btn btn-default" ng-click="userCtrl.createUser();" ng-disabled="userCtrl.createUserForm.$invalid" showprogress="userCtrl.isOperationPending">Create User</button>
+                                <button type="submit" class="btn btn-default" ng-click="userCtrl.createUser();" ng-disabled="userCtrl.createUserForm.$invalid || userCtrl.createUserForm.$pending" showprogress="userCtrl.isOperationPending">Create User</button>
                             </form>
                         </fieldset>
                         <!--we have used another ng-if here to add elements based on some condition-->
