@@ -28,7 +28,7 @@
                     var width = Math.round(height / 20);
 
                     var spinnerOptions = {
-                        lines: 17, // The number of lines to draw
+                        lines: 13, // The number of lines to draw
                         length: length, // The length of each line
                         width: width, // The line thickness
                         radius: radius, // The radius of the inner circle
