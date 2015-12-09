@@ -67,6 +67,33 @@ src\user\user-create-tmpl.html
 
 ### Update 3
 >
-#### Added express based rest api showing basic CRUD operations using node as web server. Also, added a very basic authentication.
+#### Added express based rest api showing basic CRUD operations using node as web server. Also, added a very basic authentication. To take the update do a git pull in the repo directory, if already cloned or use below command to clone the complete repo.
+
+`git clone https://github.com/ajkaushik/basicangularjs.git`
+
+##### For using the node server, node installation is needed. Please follow below steps to setup Node server :
+  -  Install Node (go to [Node Install](https://nodejs.org/en/download/))
+  -  Open a command prompt
+  -  Navigate to \basicangularjs\backend directory
+  -  Use below command to download all dependencies used by our node/express app:
+      `npm i`
+  -  Once all the dependencies are loaded, start the node server using below command :
+      `npm start`
+  -  Server will start on localhost:3030.
+  -  Mock user data is present in dummydata/mock-users.json, use that for logging in.
+
+##### As node must be installed now, we will use node for serving frontend as well. For starting the front end app:
+  - Open a command prompt
+  -  -  Open a command prompt
+  -  Navigate to \basicangularjs\frontend directory
+  -  Once all the dependencies are loaded, start the node server using below command :
+      `npm start`
+  -  Front end app should start at localhost:3000
+
+We will further improve our Node server code, and will add a better authenticatio/authorize module in next phase.
+
+  
+
+
 
 
