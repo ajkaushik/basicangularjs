@@ -90,7 +90,7 @@ src\user\user-create-tmpl.html
       `npm start`
   -  Front end app should start at localhost:3000
 
-We will further improve our Node server code, and will add a better authenticatio/authorize module in next phase.
+We will further improve our Node server code, and will add a better authentication/authorization module in next phase.
 
   
 
