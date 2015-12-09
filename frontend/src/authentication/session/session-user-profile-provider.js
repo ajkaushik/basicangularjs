@@ -21,7 +21,7 @@
             var userName = undefined;
             var currentUser = sessionService.getCurrentUser();
             if (currentUser) {
-                userName = currentUser.firstName + " " + currentUser.lastName;
+                userName = currentUser.loggedInUser;
             }
             return userName;
         }
@@ -39,7 +39,7 @@
 
         function fnGetRoles() {
             var deferred = $q.defer();
-            var roles = ["user"];
+            var roles = [];//["user"];
             var userRoles = sessionService.getRoles();
             if (userRoles) {
                 roles = userRoles;

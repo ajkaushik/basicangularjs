@@ -1,17 +1,19 @@
-<div class="well">
-    <fieldset>
-        <legend>Collaborators</legend>
-        <img alt="Loading Repo details..." src="assets/img/progress.gif" ng-if="repoDetailsCtrl.repoDetailsLoading"></img>
-        <div ng-if="!repoDetailsCtrl.repoDetailsLoading">
-            <h3>{{repoDetailsCtrl.repo.name}}</h3>
-            <div class="list-group" ng-controller="userCtrl as userCtrl">
-                <a ng-repeat="user in repoDetailsCtrl.repo.collaborators" class="list-group-item">
-                    <span class="list-group-item-text">
+<div class="container">
+    <div class="well">
+        <fieldset>
+            <legend>Collaborators</legend>
+            <img alt="Loading Repo details..." src="assets/img/progress.gif" ng-if="repoDetailsCtrl.repoDetailsLoading"></img>
+            <div ng-if="!repoDetailsCtrl.repoDetailsLoading">
+                <h3>{{repoDetailsCtrl.repo.name}}</h3>
+                <div class="list-group" ng-controller="userCtrl as userCtrl">
+                    <a ng-repeat="user in repoDetailsCtrl.repo.collaborators" class="list-group-item">
+                        <span class="list-group-item-text">
             <img style="width:80px;height:80px;" ng-src="{{user.avatar_url}}" title="{{user.login}}" />
         </span>
-                    <span class="list-group-item-text">{{user.login}}</span>
-                </a>
+                        <span class="list-group-item-text">{{user.login}}</span>
+                    </a>
+                </div>
             </div>
-        </div>
-    </fieldset>
+        </fieldset>
+    </div>
 </div>

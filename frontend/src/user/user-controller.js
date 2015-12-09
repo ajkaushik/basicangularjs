@@ -109,7 +109,7 @@
 
         userCtrl.updateUser = function() {
             userCtrl.isOperationPending = true;
-            userService.updateUser(userCtrl.originalUser, userCtrl.editUser)
+            userService.updateUser(userCtrl.editUser)
                 .then(function(users) {
                     userCtrl.isOperationPending = false;
                     resetFields();

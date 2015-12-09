@@ -1,4 +1,4 @@
-(function(angular) {
+(function(angular, _) {
 
     //We can create services on any existing angular module, to get the
     //module, the syntax is :
@@ -21,7 +21,9 @@
 
     //In this example, we will create a Constant service on userModule
     //to hold the URL of our remote service for getting all users
-    userModule.constant("USER_API_URL", "user/mock-users.json");
+
+    //userModule.constant("USER_API_URL", "user/mock-users.json");
+    userModule.constant("USER_API_URL", "http://localhost:3030/api/users");
 
     //Create a service on user module using .factory() function. Angular
     //will execute the function specified as service and will return
@@ -81,7 +83,8 @@
             getUsers: getUsers,
             createUser: createUser,
             deleteUser: deleteUser,
-            updateUser: updateUser
+            updateUser: updateUser,
+            validateUsername: validateUsername
         };
 
         function getUsers() {
@@ -125,7 +128,7 @@
                     //existing users
                     deferred.resolve(users);
                 }
-            }, 2000);
+            }, 0000);
 
             //Return the promise to caller of this function
             return deferred.promise;
@@ -139,50 +142,93 @@
                 if (!validationResult.isValid) {
                     deferred.reject(validationResult.message);
                 } else {
-                    newUser.password = "test123";
-                    users.push(newUser);
-                    deferred.resolve(users);
+                    $http.post(USER_API_URL, newUser)
+                        .then(function(response) {
+                            users.push(response.data);
+                            deferred.resolve(users);
+                        })
+                        .catch(function(response) {
+                            deferred.reject(response.data.status);
+                        });
                 }
-            }, 2000);
+            }, 0000);
             return deferred.promise;
         }
 
-        function updateUser(originalUser, updatedUser) {
+        function updateUser(updatedUser) {
             var deferred = $q.defer();
             setTimeout(function() {
                 var validationResult = validateUser(updatedUser);
                 if (!validationResult.isValid) {
                     deferred.reject(validationResult.message);
                 } else {
-                    //HardCoded error condition, just to show failure on screen
-                    if (!originalUser || originalUser.firstName === "Abhishek") {
-                        deferred.reject("Mock Error scenario - Update failed.");
-                    } else {
-                        var index = users.indexOf(originalUser);
-                        if (index > -1) {
-                            users[index] = updatedUser;
-                        }
-                        deferred.resolve(users);
-                    }
+
+                    $http.put(USER_API_URL, updatedUser)
+                        .then(function(response) {
+                            var updatedUserFromServer = response.data;
+                            var index = _.findIndex(users, function(user) {
+                                return user.userName == updatedUserFromServer.userName;
+                            });
+                            if (index >= 0) {
+                                users.splice(index, 1);
+                                users.push(updatedUserFromServer);
+                            }
+                            deferred.resolve(users);
+                        })
+                        .catch(function(response) {
+                            deferred.reject(response.data.status);
+                        });
                 }
-            }, 2000);
+            }, 0000);
             return deferred.promise;
         }
 
         function deleteUser(user) {
             var deferred = $q.defer();
             setTimeout(function() {
-                //HardCoded error condition, just to show failure on screen
-                if (!user || user.firstName === "Abhishek") {
-                    deferred.reject("Mock Error scenario - Deletion failed.");
+                if (user && user.userName) {
+                    $http.delete(USER_API_URL + "/" + user.userName)
+                        .then(function(response) {
+                            var deleteUserNameFromServer = response.data;
+                            var index = _.findIndex(users, function(user) {
+                                return user.userName == deleteUserNameFromServer;
+                            });
+                            if (index >= 0) {
+                                users.splice(index, 1);
+                            }
+                            deferred.resolve(users);
+                        })
+                        .catch(function(response) {
+                            deferred.reject(response.data.status);
+                        });
                 } else {
-                    var index = users.indexOf(user);
-                    if (index > -1) {
-                        users.splice(index, 1)
-                    }
-                    deferred.resolve(users);
+                    deferred.reject("Invalid user details.");
                 }
-            }, 2000);
+            }, 0000);
+            return deferred.promise;
+        }
+
+        function validateUsername(username) {
+
+            //We will return a promise from here, once we add
+            //the remote service call here, the controller will not
+            //have to change, and we will keep the interface same
+            var deferred = $q.defer();
+            if (!username) {
+                deferred.reject("Username not valid.");
+            }
+            setTimeout(function() {
+                $http.post(USER_API_URL + "/validate", {
+                        userName: username
+                    })
+                    .then(function(response) {
+                        deferred.resolve(response.data.status);
+                    })
+                    .catch(function(response) {
+                        deferred.reject(response.data.status);
+                    });
+            }, 300);
+            //Return the promise to consumer
             return deferred.promise;
         }
 
@@ -203,4 +249,4 @@
             return validationResult;
         }
     }
-}(window.angular));
+}(window.angular, window._));
