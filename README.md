@@ -65,4 +65,8 @@ src\authentication\login\helpers\validate-username-directive.js
 src\user\user-create-tmpl.html
 ```
 
+### Update 3
+>
+#### Added express based rest api showing basic CRUD operations using node as web server. Also, added a very basic authentication.
+
 
